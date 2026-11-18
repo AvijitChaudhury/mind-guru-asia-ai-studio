@@ -325,5 +325,6 @@ if(DATA.length!==50000)throw new Error(`Expected 50000 video prompts, got ${DATA
  window.addEventListener('appinstalled',()=>{if(installBtn)installBtn.style.display='none'});
  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(err=>console.warn('Offline setup unavailable:',err)));
 })();
-</script>
+</script> 
+<script src="./v14-video-hub.js"></script>
 </body></html>
