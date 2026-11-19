@@ -344,7 +344,6 @@ ${get("charExtra")}`;
     if (page && page.textContent.startsWith("Page")) {
       page.textContent = page.textContent.replace("Page", text.page);
     }
-
     const pageLabel = $("pageLabel");
     if (pageLabel && pageLabel.textContent.startsWith("Page")) {
       pageLabel.textContent = pageLabel.textContent.replace("Page", text.page);
@@ -370,4 +369,72 @@ ${get("charExtra")}`;
   if ($("dashboardLang")?.value === "as") translate();
 
   console.log("Assamese UI extension loaded.");
+})();
+/* Mind Guru V14 — Assamese Label Fix */
+(() => {
+  "use strict";
+
+  const translations = {
+    "Quick action library": "দ্ৰুত একচন লাইব্ৰেৰী",
+    "100 TAG FAMILIES": "১০০টা টেগ পৰিয়াল",
+    "All action categories": "সকলো একচন শ্ৰেণী",
+    "Product Ads": "সামগ্ৰীৰ বিজ্ঞাপন",
+    "Talking Avatar": "কথা কোৱা অৱতাৰ",
+    "Motivational": "অনুপ্ৰেৰণামূলক",
+    "Cinematic": "চিনেমাটিক",
+    "Camera Motion": "কেমেৰাৰ গতি",
+    "360 Orbit": "৩৬০ ডিগ্ৰী পৰিভ্ৰমণ",
+    "Talking Cartoon": "কথা কোৱা কাৰ্টুন",
+    "Explainer": "ব্যাখ্যামূলক",
+    "Podcast": "পডকাষ্ট",
+    "Social Reels": "ছ'চিয়েল ৰীলছ",
+    "Fashion": "ফেশ্বন",
+    "Food": "খাদ্য",
+    "Travel": "ভ্ৰমণ",
+    "Real Estate": "ৰিয়েল ইষ্টেট",
+    "Education": "শিক্ষা",
+    "Wellness": "সুস্থতা",
+    "Music Visualizer": "সংগীত দৃশ্যায়ন",
+    "Logo Reveal": "ল'গ' উন্মোচন",
+    "Nature": "প্ৰকৃতি",
+    "Business": "ব্যৱসায়",
+    "Search short prompts or tags…": "চুটি প্ৰম্পট বা টেগ বিচাৰক…",
+    "Search prompts, tags, ideas…": "প্ৰম্পট, টেগ আৰু ধাৰণা বিচাৰক…",
+    "Copy short prompt": "চুটি প্ৰম্পট কপি কৰক",
+    "Copy tags": "টেগ কপি কৰক",
+    "Copy prompt": "প্ৰম্পট কপি কৰক",
+    "Copy tags": "টেগ কপি কৰক"
+  };
+
+  function translateLabels() {
+    document.querySelectorAll("body *").forEach(el => {
+      if (el.children.length === 0) {
+        const original = el.textContent.trim();
+        if (translations[original] && el.textContent !== translations[original]) {
+          el.textContent = translations[original];
+        }
+      }
+
+      if (el.placeholder && translations[el.placeholder]) {
+        el.placeholder = translations[el.placeholder];
+      }
+    });
+  }
+
+  function run() {
+    const language = document.getElementById("dashboardLang");
+    if (language && language.value === "as") translateLabels();
+  }
+
+  run();
+
+  new MutationObserver(run).observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  document.getElementById("dashboardLang")
+    ?.addEventListener("change", run);
+
+  console.log("Assamese label fix loaded.");
 })();
