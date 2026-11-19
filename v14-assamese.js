@@ -221,3 +221,153 @@ ${get("charExtra")}`;
 
   console.log("Mind Guru Assamese language pack loaded.");
 })();
+/* Assamese UI Extension — V14 */
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const text = {
+    quick: "দ্ৰুত একচন লাইব্ৰেৰী",
+    shortTitle: "⚡ ১০,০০০ চুটি টেগ আৰু ট্ৰেণ্ড প্ৰম্পট",
+    shortDesc: "১০০টা পুনৰ ব্যৱহাৰযোগ্য টেগ পৰিয়াল আৰু ১০,০০০টা নম্বৰযুক্ত ভিন্নতা।",
+    families: "১০০টা টেগ পৰিয়াল",
+    browse: "✦ শ্ৰেণীসমূহ চাওক",
+    selectCategory: "ফিল্টাৰ কৰিবলৈ এটা শ্ৰেণী বাছনি কৰক।",
+    library: "প্ৰম্পট লাইব্ৰেৰী",
+    random: "⤨ যিকোনো প্ৰম্পট",
+    reset: "পুনৰ ছেট কৰক",
+    searchShort: "চুটি প্ৰম্পট বা টেগ বিচাৰক…",
+    searchMain: "প্ৰম্পট, টেগ আৰু ধাৰণা বিচাৰক…",
+    allCategories: "সকলো একচন শ্ৰেণী",
+    previous: "← আগলৈ",
+    next: "পিছলৈ →",
+    loading: "১০,০০০টা চুটি প্ৰম্পট লোড হৈ আছে…",
+    page: "পৃষ্ঠা",
+    buildTip: "নিজৰ মুখৰ ভিডিঅ'ৰ বাবে ভিডিঅ' জেনেৰেটৰত নিজৰ ফটো আপলোড কৰক আৰু পৰিচয়ৰ ৰেফাৰেন্স হিচাপে ব্যৱহাৰ কৰক।",
+    copy: "প্ৰম্পট কপি কৰক",
+    generate: "প্ৰম্পট সৃষ্টি কৰক",
+    all: "সকলো",
+    english: "English",
+    bengali: "বাংলা",
+    hindi: "हिन्दी",
+    assamese: "অসমীয়া"
+  };
+
+  function addAssameseOption(id, label) {
+    const el = $(id);
+    if (!el || [...el.options].some(o => o.value === "as")) return;
+    const option = document.createElement("option");
+    option.value = "as";
+    option.textContent = label;
+    el.appendChild(option);
+  }
+
+  ["shortLang", "lang"].forEach(id => addAssameseOption(id, "অসমীয়া"));
+
+  function translateOptions(id, map) {
+    const el = $(id);
+    if (!el) return;
+    [...el.options].forEach(option => {
+      if (map[option.textContent.trim()]) {
+        option.dataset.originalText ||= option.textContent;
+        option.textContent = map[option.textContent.trim()];
+      }
+    });
+  }
+
+  const categories = {
+    "All action categories": "সকলো একচন শ্ৰেণী",
+    "Product Ads": "সামগ্ৰীৰ বিজ্ঞাপন",
+    "Talking Avatar": "কথা কোৱা অৱতাৰ",
+    "Motivational": "অনুপ্ৰেৰণামূলক",
+    "UGC": "ব্যৱহাৰকাৰীৰ সৃষ্টি কৰা সমল",
+    "POV": "দৃষ্টিকোণ",
+    "ASMR": "এ এছ এম আৰ",
+    "Transitions": "দৃশ্য পৰিৱৰ্তন",
+    "Camera Moves": "কেমেৰাৰ গতি",
+    "Creator Trends": "ক্ৰিয়েটৰ ট্ৰেণ্ড"
+  };
+
+  const sortOptions = {
+    "ID order": "আইডি অনুসৰি",
+    "Tag A–Z": "টেগ ক্ৰম অনুসৰি"
+  };
+
+  function translate() {
+    const dashboard = $("dashboardLang");
+    if (!dashboard || dashboard.value !== "as") return;
+
+    const setText = (selector, value) => {
+      const el = document.querySelector(selector);
+      if (el) el.textContent = value;
+    };
+
+    setText("#shortLibrary .eyebrow", text.quick);
+    setText("#shortLibrary .mainhead h3", text.shortTitle);
+    setText("#shortLibrary .notice", text.shortDesc);
+    setText("#shortLibrary .premium", text.families);
+    setText(".layout aside h3", text.browse);
+    setText(".layout aside .notice", text.selectCategory);
+    setText(".layout main .mainhead h3", text.library);
+
+    if ($("shortSearch")) $("shortSearch").placeholder = text.searchShort;
+    if ($("search")) $("search").placeholder = text.searchMain;
+
+    const labels = {
+      randomBtn: text.random,
+      resetBtn: text.reset,
+      shortPrev: text.previous,
+      shortNext: text.next,
+      prev: text.previous,
+      next: text.next
+    };
+
+    Object.entries(labels).forEach(([id, value]) => {
+      if ($(id)) $(id).textContent = value;
+    });
+
+    translateOptions("shortCat", categories);
+    translateOptions("sort", sortOptions);
+
+    const shortLang = $("shortLang");
+    const mainLang = $("lang");
+
+    [shortLang, mainLang].forEach(el => {
+      if (!el) return;
+      [...el.options].forEach(option => {
+        if (option.value === "as") option.textContent = "অসমীয়া";
+      });
+    });
+
+    const page = $("shortPage");
+    if (page && page.textContent.startsWith("Page")) {
+      page.textContent = page.textContent.replace("Page", text.page);
+    }
+
+    const pageLabel = $("pageLabel");
+    if (pageLabel && pageLabel.textContent.startsWith("Page")) {
+      pageLabel.textContent = pageLabel.textContent.replace("Page", text.page);
+    }
+
+    const dashboardOption = [...dashboard.options].find(o => o.value === "as");
+    if (dashboardOption) dashboardOption.textContent = "অসমীয়া UI";
+  }
+
+  const observer = new MutationObserver(() => {
+    if ($("dashboardLang")?.value === "as") translate();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  ["dashboardLang", "shortLang", "lang"].forEach(id => {
+    $(id)?.addEventListener("change", translate);
+  });
+
+  if ($("dashboardLang")?.value === "as") translate();
+
+  console.log("Assamese UI extension loaded.");
+})();
