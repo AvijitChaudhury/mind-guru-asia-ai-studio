@@ -266,7 +266,7 @@ if(DATA.length!==50000)throw new Error(`Expected 50000 video prompts, got ${DATA
   ["headNod", "Head Nod", "nods gently to emphasize a point", "গুরুত্ব বোঝাতে আলতো মাথা নাড়েন", "बात पर ज़ोर देने के लिए हल्का सिर हिलाएं"],
   ["handGesture", "Hand Gesture", "uses expressive natural hand gestures", "স্বাভাবিক অভিব্যক্তিপূর্ণ হাতের অঙ্গভঙ্গি করেন", "स्वाभाविक अभिव्यक्तिपूर्ण हाथ के इशारे करें"],
   ["fingerSnap", "Finger Snap", "snaps fingers to trigger a visual change", "ভিজ্যুয়াল পরিবর্তনের সংকেত দিতে আঙুল ফোটান", "दृश्य बदलाव के लिए उंगलियां चटकाएं"],
-  ["clap", "Clap", "claps once with energetic emphasis", "উদ্যমের সঙ্গে একবার হাততালি দেন", "ऊर्जा से एक बार ताली बजाएं"],
+  ["clap", "Clap", "claps one with energetic emphasis", "উদ্যমের সঙ্গে একবার হাততালি দেন", "ऊर्जा से एक बार ताली बजाएं"],
   ["heartGesture", "Heart Gesture", "forms a heart gesture with both hands", "দুই হাতে হার্টের অঙ্গভঙ্গি করেন", "दोनों हाथों से हार्ट जेस्चर बनाएं"],
   ["thumbsUp", "Thumbs Up", "gives a clear thumbs-up to camera", "ক্যামেরার দিকে থাম্বস-আপ দেন", "कैमरे की ओर थम्स-अप दें"],
   ["peaceSign", "Peace Sign", "makes a friendly peace sign", "বন্ধুত্বপূর্ণ পিস সাইন করেন", "दोस्ती से पीस साइन बनाएं"],
@@ -326,5 +326,7 @@ if(DATA.length!==50000)throw new Error(`Expected 50000 video prompts, got ${DATA
  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(err=>console.warn('Offline setup unavailable:',err)));
 })();
 </script> 
-<script src="./v14-video-hub.js"></script>
- </body></html>
+<script src="./v14-multilingual.js"></script>
+ <script src="./v14-video-hub.js"></script>
+</body>
+</html>
